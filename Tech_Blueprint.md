@@ -5,53 +5,8 @@ Enerwise is a multi-layer intelligent energy ecosystem connecting individuals, g
 ### High-Level Architecture
 
 ```mermaid
-graph TB
-    A[Global Coordination Layer]
-    B[Market & Trading Layer] 
-    C[User Intelligence Layer]
-    D[Physical Infrastructure Layer]
-    
-    A1[Planetary AI Optimization]
-    A2[Cross-Border Energy Flow]
-    A3[Climate Impact Modeling]
-    
-    B1[Peer-to-Peer Exchange]
-    B2[AI Trading Agents]
-    B3[Smart Contract Settlement]
-    
-    C1[Personal Energy AI]
-    C2[Device Management]
-    C3[Behavior Learning]
-    
-    D1[Grid Operations]
-    D2[Renewable Assets]
-    D3[Storage Systems]
-    
-    A --> A1
-    A --> A2
-    A --> A3
-    
-    B --> B1
-    B --> B2
-    B --> B3
-    
-    C --> C1
-    C --> C2
-    C --> C3
-    
-    D --> D1
-    D --> D2
-    D --> D3
-    
-    A1 --> B2
-    A2 --> B1
-    A3 --> B3
-    B1 --> C1
-    B2 --> C3
-    B3 --> C2
-    C1 --> D1
-    C2 --> D2
-    C3 --> D3
+graph TD; A[Global Coordination Layer: Planetary AI Optimization, Cross-Border Energy Flow, Climate Impact Modeling] --> B[Market & Trading Layer: Peer-to-Peer Exchange, AI Trading Agents, Smart Contract Settlement]; B --> C[User Intelligence Layer: Personal Energy AI, Device Management, Behavior Learning]; C --> D[Physical Infrastructure Layer: Grid Operations, Renewable Assets, Storage Systems];
+
 ```
 
 ## 2. Core Technology Stack
