@@ -1,12 +1,4 @@
-Perfect! Let’s move forward. The next logical file is **User_Interface_UX_Details.md**, where we describe in detail how the user interacts with the app, the UX flow, the design system, and all the human-centered elements. We’ll make it **professional, clean, GitHub-ready**, same format as `Roadmap.md` and `Product_Overview_Features.md`.
 
-Here’s the full Markdown you can copy-paste:
-
----
-
-# User_Interface_UX_Details.md
-
-````markdown
 # Enerwise User Interface & UX Details
 
 This document defines the user experience and interface design for the Enerwise ecosystem. It ensures the platform is **intuitive, human-centered, and professional**, while fully supporting web and mobile devices.
