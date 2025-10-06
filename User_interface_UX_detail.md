@@ -103,5 +103,4 @@ The Enerwise UI/UX design ensures **a human-centered experience**, balancing adv
 ```
 
 
-Do you want me to do that next?
-```
+
