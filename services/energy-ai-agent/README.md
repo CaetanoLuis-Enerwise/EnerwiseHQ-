@@ -1,28 +1,19 @@
-#  Enerwise AI Energy Agent
+#  Enerwise Grid AI Agent
 
-**Production-grade AI system for grid operations and energy forecasting**
+**Production AI System for Grid Operations & Forecasting**
 
-## Mission
-Build the most reliable AI co-pilot for grid operators, combining advanced forecasting with power system intelligence.
+##  Mission
+Build the world's most advanced AI for grid balancing and energy forecasting using state-of-the-art models.
 
-##  Architecture
-
-### Core Components
-- **Forecasting Engine**: LSTM, Transformer, XGBoost ensemble
-- **Grid Optimizer**: Real-time operational suggestions  
-- **Weather Integration**: Live meteorological data
-- **Explainable AI**: Human-understandable decision rationale
-
-### Data Sources
-- Grid load data (ENTSO-E, utility APIs)
-- Weather forecasts (ECMWF, NOAA)
-- Market prices (Day-ahead, real-time)
-- Renewable generation data
+##  Features
+- **TimeGPT & N-BEATS** for ultra-accurate forecasting
+- **Real-time grid optimization** suggestions
+- **Weather & market data** integration
+- **Explainable AI** for operator trust
+- **Production-ready** deployment
 
 ##  Quick Start
 
-# Install dependencies
+cd app
 pip install -r requirements.txt
-
-# Run the AI agent
-python src/main.py
+python main.py
