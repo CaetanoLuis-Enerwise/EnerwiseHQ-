@@ -11,7 +11,7 @@ import logging
 import asyncio
 import numpy as np
 from typing import List, Dict, Any, Optional
-
+from models.energy_models import EnergyForecastRequest, EnergyForecastResponse, EnergyType, GridRegion
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("enerwise.grid_ai")
@@ -301,3 +301,65 @@ if __name__ == "__main__":
         reload=True,
         log_level="info"
     )
+@app.post("/api/energy-forecast", response_model=EnergyForecastResponse)
+async def energy_forecast_endpoint(request: EnergyForecastRequest):
+    """
+    Energy-type specific forecasting for grid operations
+    Handles solar, wind, hydro, demand with specialized logic
+    """
+    try:
+        logger.info(f"Energy forecast: {request.region}, {request.energy_type}, {request.horizon}h")
+        
+        # Get forecast from our advanced engine
+        result = await advanced_forecaster.forecast(request.values, request.horizon)
+        
+        # Generate energy-specific summary
+        forecast_values = result["ensemble_forecast"]
+        summary = await _generate_energy_summary(forecast_values, request.energy_type, request.region)
+        
+        return EnergyForecastResponse(
+            region=request.region,
+            energy_type=request.energy_type,
+            forecast=forecast_values,
+            confidence_intervals=result["confidence_intervals"],
+            mode=result["mode"],
+            timestamp=result["timestamp"],
+            model_metadata=result.get("model_metadata", {}),
+            summary=summary
+        )
+        
+    except Exception as e:
+        logger.error(f"Energy forecast failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Energy forecasting error: {str(e)}")
+
+# Add this helper function to your main.py
+async def _generate_energy_summary(forecast_values: List[float], energy_type: EnergyType, region: GridRegion) -> Dict[str, Any]:
+    """Generate energy-specific summary statistics"""
+    peak_value = max(forecast_values)
+    avg_value = sum(forecast_values) / len(forecast_values)
+    
+    # Energy-type specific metrics
+    if energy_type == EnergyType.SOLAR:
+        capacity_factor = (avg_value / 1000) * 100  # Assuming 1MW system
+        return {
+            "peak_generation": peak_value,
+            "average_generation": avg_value,
+            "capacity_factor": f"{capacity_factor:.1f}%",
+            "total_energy": sum(forecast_values),
+            "production_hours": len([v for v in forecast_values if v > 10])
+        }
+    elif energy_type == EnergyType.DEMAND:
+        return {
+            "peak_demand": peak_value,
+            "average_demand": avg_value,
+            "load_factor": f"{(avg_value / peak_value * 100):.1f}%",
+            "total_consumption": sum(forecast_values),
+            "peak_periods": len([v for v in forecast_values if v > avg_value * 1.2])
+        }
+    else:
+        return {
+            "peak_value": peak_value,
+            "average_value": avg_value,
+            "total_energy": sum(forecast_values),
+            "variability": max(forecast_values) - min(forecast_values)
+        }
